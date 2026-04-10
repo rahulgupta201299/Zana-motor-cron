@@ -32,7 +32,6 @@ const updateShipkloudShipmentDetails = async () => {
             try {
                 // API call to Shipkloud to get order details
                 // Assuming POST with order_id as per integration pattern
-                console.log('order.logisticsOrderId' + order.logisticsOrderId)
                 const response = await axios.get(`${SHIPKLOUD_GET_ORDER_DETAILS_URL}/${order.logisticsOrderId}`,
                     {
                         headers: {
@@ -43,7 +42,6 @@ const updateShipkloudShipmentDetails = async () => {
                     });
 
                 // Validate successful response
-                console.log('response.data' + JSON.stringify(response.data))
                 if (response.data && response.data.result == "1" && response.data.data && response.data.data.length > 0) {
                     const shipmentData = response.data.data[0];
                     const awbNumber = shipmentData.shipping_details ? shipmentData.shipping_details.awb_number : null;
