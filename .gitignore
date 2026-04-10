@@ -1,0 +1,5 @@
+node_modules
+dummy_data.js
+*.md
+config.bat
+.env
