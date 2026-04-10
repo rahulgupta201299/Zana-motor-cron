@@ -76,7 +76,7 @@ const pushOrdersToShipkloud = async () => {
                     gst_ewaybill_number: "",
                     gstin_number: ""
                 };
-                console.log('Payload: ' + JSON.stringify(payload));
+
                 const response = await axios.post(SHIPKLOUD_PUSH_ORDER_URL, payload, {
                     headers: {
                         'public-key': SHIPKLOUD_PUBLIC_KEY,
@@ -104,8 +104,8 @@ const pushOrdersToShipkloud = async () => {
 };
 
 const startShipkloudPushOrderCron = () => {
-    cron.schedule('*/1 * * * *', pushOrdersToShipkloud);
-    console.log('Shipkloud Order Push Cron Job scheduled for every 10 minutes.');
+    cron.schedule('*/5 * * * *', pushOrdersToShipkloud);
+    console.log('Shipkloud Order Push Cron Job scheduled for every 5 minutes.');
 };
 
 module.exports = { startShipkloudPushOrderCron, pushOrdersToShipkloud };
