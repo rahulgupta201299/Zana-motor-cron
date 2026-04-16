@@ -17,20 +17,8 @@ const pushOrdersToShipkloud = async () => {
                         { paymentMethod: 'online', paymentStatus: 'paid', orderStatus: 'placed' }
                     ]
                 },
-                {
-                    $or: [
-                        { logisticsTrackingNumber: { $exists: false } },
-                        { logisticsTrackingNumber: '' },
-                        { logisticsTrackingNumber: null }
-                    ]
-                },
-                {
-                    $or: [
-                        { logisticsOrderId: { $exists: false } },
-                        { logisticsOrderId: '' },
-                        { logisticsOrderId: null }
-                    ]
-                }
+                { logisticsTrackingNumber: null },
+                { logisticsOrderId: null }
             ]
         }).populate('items.product');
 

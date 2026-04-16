@@ -13,12 +13,8 @@ const updateShipkloudShipmentDetails = async () => {
     try {
         // Query orders that have a logisticsOrderId but don't have an AWB number yet
         const orders = await Order.find({
-            logisticsOrderId: { $exists: true, $ne: null, $ne: '' },
-            $or: [
-                { logisticsAWBNumber: { $exists: false } },
-                { logisticsAWBNumber: '' },
-                { logisticsAWBNumber: null }
-            ]
+            logisticsOrderId: { $exists: true, $ne: null },
+            logisticsAWBNumber: null
         });
 
         if (orders.length === 0) {
