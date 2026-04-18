@@ -92,7 +92,8 @@ const pushOrdersToShipkloud = async () => {
 };
 
 const startShipkloudPushOrderCron = () => {
-    cron.schedule('*/5 * * * *', pushOrdersToShipkloud);
+    const { PUSH_ORDER_CRON = '*/5 * * * *' } = config
+    cron.schedule(PUSH_ORDER_CRON, pushOrdersToShipkloud);
     console.log('Shipkloud Order Push Cron Job scheduled for every 5 minutes.');
 };
 

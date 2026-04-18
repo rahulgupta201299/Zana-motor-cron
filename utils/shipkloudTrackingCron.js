@@ -67,7 +67,8 @@ const updateShipkloudShipmentDetails = async () => {
  */
 const startShipkloudTrackingCron = () => {
     // Run every 5 minutes: */5 * * * *
-    cron.schedule('*/1 * * * *', updateShipkloudShipmentDetails);
+    const { TRACK_ORDER_CRON = '*/5 * * * *' } = config
+    cron.schedule(TRACK_ORDER_CRON, updateShipkloudShipmentDetails);
     console.log('Shipkloud Tracking Cron Job scheduled for every 5 minutes.');
 };
 

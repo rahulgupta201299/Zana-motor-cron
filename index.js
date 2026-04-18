@@ -2,6 +2,7 @@ require('dotenv').config();
 const connectDB = require('./config/database');
 const { startShipkloudPushOrderCron } = require('./utils/shipkloudPushOrderCron');
 const { startShipkloudTrackingCron } = require('./utils/shipkloudTrackingCron');
+const { startDailyEmailReportsCron } = require('./utils/dailyEmailReportsCron');
 
 /**
  * Isolated Shipkloud Cron Server
@@ -15,6 +16,7 @@ const startServer = async () => {
     // 2. Start the Cron Jobs
     startShipkloudPushOrderCron();
     startShipkloudTrackingCron();
+    startDailyEmailReportsCron();
 
     console.log('Process is idle and waiting for the next cron execution...');
 };
