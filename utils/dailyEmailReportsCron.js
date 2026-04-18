@@ -108,7 +108,7 @@ function makeMailer() {
 
 async function generateAndSendDailyReports() {
     const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate());
+    yesterday.setDate(yesterday.getDate() - 1);
 
     const { start, end } = getDayRange(yesterday);
     console.log(`[Daily Email Reports] Generating reports for createdAt >= ${start.toISOString()} and < ${end.toISOString()}`);
