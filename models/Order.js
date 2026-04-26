@@ -36,6 +36,7 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     paymentMethod: String,
+    advancePaid: Number,
     paymentStatus: String,
     orderStatus: String,
     orderDate: {
