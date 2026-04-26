@@ -13,7 +13,6 @@ const pushOrdersToShipkloud = async () => {
             $and: [
                 {
                     $or: [
-                        { paymentMethod: 'cod', paymentStatus: 'pending', orderStatus: 'pending', advancePaid: 0 },
                         { paymentMethod: 'cod', paymentStatus: 'partial_paid', orderStatus: 'placed' },
                         { paymentMethod: 'online', paymentStatus: 'paid', orderStatus: 'placed' }
                     ]
