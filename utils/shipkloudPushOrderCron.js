@@ -13,7 +13,8 @@ const pushOrdersToShipkloud = async () => {
             $and: [
                 {
                     $or: [
-                        { paymentMethod: 'cod', paymentStatus: 'pending', orderStatus: 'pending' },
+                        { paymentMethod: 'cod', paymentStatus: 'pending', orderStatus: 'pending', advancePaid: 0 },
+                        { paymentMethod: 'cod', paymentStatus: 'partial_paid', orderStatus: 'placed' },
                         { paymentMethod: 'online', paymentStatus: 'paid', orderStatus: 'placed' }
                     ]
                 },
@@ -54,7 +55,7 @@ const pushOrdersToShipkloud = async () => {
                         product_category: item.product ? item.product.category || 'Other' : 'Other'
                     })),
                     payment_type: order.paymentMethod === 'cod' ? 'COD' : 'PREPAID',
-                    cod_amount: order.paymentMethod === 'cod' ? order.totalAmount : "",
+                    cod_amount: order.paymentMethod === 'cod' ? (order.totalAmount - (order.advancePaid || 0)) : "",
                     shipping_charges: order.shippingCost || 0,
                     weight: 1,
                     length: 1,
