@@ -122,7 +122,8 @@ async function generateAndSendDailyReports() {
         }).populate('items.product').lean(),
         Order.find({
             paymentMethod: 'cod',
-            paymentStatus: 'pending',
+            paymentStatus: 'partial_paid',
+            orderStatus: 'placed',
             createdAt: { $gte: start, $lt: end }
         }).populate('items.product').lean(),
         Cart.find({
@@ -231,7 +232,7 @@ async function generateAndSendDailyReports() {
         { header: 'CartShippingCost', get: r => r.cart.shippingCost ?? '' },
         { header: 'CartDiscountAmount', get: r => r.cart.discountAmount ?? '' },
         { header: 'CartTaxAmount', get: r => r.cart.taxAmount ?? '' },
-        { header: 'CartSubtotal', get: r => r.cart.subtotal ?? '' },        
+        { header: 'CartSubtotal', get: r => r.cart.subtotal ?? '' },
         { header: 'CartTotalAmount', get: r => r.cart.totalAmount ?? '' },
         { header: 'PaymentMethod', get: r => r.cart.paymentMethod || '' },
         { header: 'PaymentStatus', get: r => r.cart.paymentStatus || '' },
@@ -288,7 +289,7 @@ async function generateAndSendDailyReports() {
 }
 
 const startDailyEmailReportsCron = () => {
-    const { DAILY_REPORTS_CRON = '0 9 * * *' } = config 
+    const { DAILY_REPORTS_CRON = '0 9 * * *' } = config
 
     cron.schedule(
         DAILY_REPORTS_CRON,
