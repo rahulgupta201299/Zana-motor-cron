@@ -3,12 +3,14 @@ const connectDB = require('./config/database');
 const { startShipkloudPushOrderCron } = require('./utils/shipkloudPushOrderCron');
 const { startShipkloudTrackingCron } = require('./utils/shipkloudTrackingCron');
 const { startDailyEmailReportsCron } = require('./utils/dailyEmailReportsCron');
+const { startPaymentDropoffCron } = require('./utils/paymentDropoffCron');
+const { startAbandonedCartCron } = require('./utils/abandonedCartCron');
 
 /**
  * Isolated Shipkloud Cron Server
  */
 const startServer = async () => {
-    console.log('--- Isolated Shipkloud Cron Service ---');
+    console.log('--- Isolated Cron Service ---');
 
     // 1. Connect to Database
     await connectDB();
@@ -17,6 +19,8 @@ const startServer = async () => {
     startShipkloudPushOrderCron();
     startShipkloudTrackingCron();
     startDailyEmailReportsCron();
+    startPaymentDropoffCron();
+    startAbandonedCartCron();
 
     console.log('Process is idle and waiting for the next cron execution...');
 };
