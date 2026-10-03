@@ -81,9 +81,13 @@ const processPaymentDropoffCarts = async () => {
             // Log to NotificationLog for async failure webhook fallback
             if (response.data.id) {
               try {
+                const formattedRecipientPhone = (phoneNumber && phoneNumber.includes('-'))
+                  ? phoneNumber
+                  : `+${countryCode}-${phoneStr}`;
+
                 await NotificationLog.create({
                   interaktMessageId: response.data.id,
-                  recipientPhone: phoneNumber,
+                  recipientPhone: formattedRecipientPhone,
                   templateName: config.INTERAKT_PAYMENT_DROPOFF_TEMPLATE_NAME,
                   fallbackText: fallbackMessageText,
                   sendSmsFallback: false,
