@@ -24,8 +24,16 @@ const notificationLogSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['queued', 'failed_sms_sent', 'failed_no_fallback'],
+        enum: ['queued', 'failed_sms_sent', 'failed_no_fallback', 'failed_sms_error'],
         default: 'queued'
+    },
+    errorReason: {
+        type: String,
+        default: null
+    },
+    errorDetails: {
+        type: mongoose.Schema.Types.Mixed,
+        default: null
     },
     metadata: {
         type: mongoose.Schema.Types.Mixed,
