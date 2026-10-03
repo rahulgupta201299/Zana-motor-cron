@@ -35,5 +35,6 @@ module.exports = {
     PAYMENT_DROPOFF_CRON: process.env.PAYMENT_DROPOFF_CRON || '*/5 * * * *',
     PAYMENT_DROPOFF_MINUTES: parseInt(process.env.PAYMENT_DROPOFF_MINUTES, 10) || 30,
     ABANDONED_CART_CRON: process.env.ABANDONED_CART_CRON || '*/5 * * * *',
-    ABANDONED_CART_MINUTES: parseInt(process.env.ABANDONED_CART_MINUTES, 10) || 30
+    ABANDONED_CART_MINUTES: parseInt(process.env.ABANDONED_CART_MINUTES, 10) || 30,
+    YESTERDAY_ABANDONED_CART_CRON: process.env.YESTERDAY_ABANDONED_CART_CRON || '0 12 * * *'
 };

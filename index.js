@@ -5,6 +5,7 @@ const { startShipkloudTrackingCron } = require('./utils/shipkloudTrackingCron');
 const { startDailyEmailReportsCron } = require('./utils/dailyEmailReportsCron');
 const { startPaymentDropoffCron } = require('./utils/paymentDropoffCron');
 const { startAbandonedCartCron } = require('./utils/abandonedCartCron');
+const { startYesterdayAbandonedCartCron } = require('./utils/yesterdayAbandonedCartCron');
 
 /**
  * Isolated Shipkloud Cron Server
@@ -21,6 +22,7 @@ const startServer = async () => {
     startDailyEmailReportsCron();
     startPaymentDropoffCron();
     startAbandonedCartCron();
+    startYesterdayAbandonedCartCron();
 
     console.log('Process is idle and waiting for the next cron execution...');
 };
